@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SuhaiB | Keep Still Boy</title>
+<meta name="color-scheme" content="dark light">
+
+<!-- SB preloads the hero video + poster at highest priority so it paints instantly -->
+<link rel="preload" as="image" href="assets/images/hero.jpg" fetchpriority="high">
+<link rel="preload" as="video" href="assets/images/hero.mp4" fetchpriority="high">
+<link rel="preload" as="image" href="assets/images/logo.png" fetchpriority="high">
+
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav id="navbar">
+<div class="nav-left">
+<img src="assets/images/logo.png" alt="SB" class="nav-logo protected-img" draggable="false">
+<div class="protected-shield protected-shield-logo" aria-hidden="true"></div>
+</div>
+
+<div class="nav-right">
+<a href="contact.html" class="nav-contact-btn">Contact us</a>
+</div>
+</nav>
+
+<main>
+<!-- SB HERO — pinned just below the navbar -->
+<section id="hero" class="hero-section">
+<div class="hero-bg">
+<video class="hero-bg-video protected-img" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" poster="assets/images/hero.jpg" draggable="false">
+<source src="assets/images/hero.mp4">
+</video>
+<div class="protected-shield" aria-hidden="true"></div>
+</div>
+<div class="hero-scrim"></div>
+<div class="glow-bg"></div>
+<div class="scroll-indicator"><span></span></div>
+</section>
+
+<div class="hero-content-wrapper">
+<div class="hero-left-block">
+<h1 class="hero-heading" id="hero-heading">
+<span class="hero-badge-box" aria-hidden="true">
+<span class="hero-badge-left">SB&trade;</span>
+<span class="hero-badge-right"><span class="hero-badge-cell">DES</span><span class="hero-badge-cell">CRF</span></span>
+</span>
+<span class="hero-heading-line">Designed to endure.<span class="hero-signature">kinG</span></span>
+</h1>
+<p class="hero-heading-desc">Elegant interfaces. Thoughtful motion. Lasting impact.</p>
+</div>
+</div>
+
+<div class="page-body">
+
+<!-- SB HERO 2 — full image, no cropping -->
+<section id="hero2" class="hero2-section">
+<img src="assets/images/hero2.png" alt="" class="hero2-img protected-img" loading="lazy" decoding="async" draggable="false">
+<div class="protected-shield" aria-hidden="true"></div>
+</section>
+
+<footer class="site-footer">
+<div class="footer-statement">
+<div class="footer-signature-wrap">
+<img src="assets/images/lastsb.png" alt="SB" class="footer-signature protected-img" draggable="false">
+<div class="protected-shield" aria-hidden="true"></div>
+</div>
+<p class="footer-tagline"><span class="footer-tagline-bold">INSPIRED</span> <span class="footer-tagline-thin">by the</span> <span class="footer-tagline-bold">IMPOSSIBLE</span></p>
+</div>
+</footer>
+
+</div>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
