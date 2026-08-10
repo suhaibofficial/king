@@ -6,15 +6,14 @@
 <title>SuhaiB | Keep Still Boy</title>
 <meta name="color-scheme" content="dark light">
 
-<!-- SB preloads the hero video + poster at highest priority so it paints instantly -->
-<link rel="preload" as="image" href="assets/images/hero.jpg" fetchpriority="high">
-<link rel="preload" as="video" href="assets/images/hero.mp4" fetchpriority="high">
-<link rel="preload" as="image" href="assets/images/logo.png" fetchpriority="high">
+<!-- SB preloads the hero image + name mark at highest priority so they paint instantly, no flash -->
+<link rel="preload" as="image" href="assets/images/main.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/images/name.png" fetchpriority="high">
 
 <link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -24,39 +23,189 @@
 <div class="protected-shield protected-shield-logo" aria-hidden="true"></div>
 </div>
 
+<!-- SB nav-right holds both the desktop link row (≥960px, opposite the logo) and the
+     mobile hamburger (<960px) — only one of the two is ever visible at a given width. -->
 <div class="nav-right">
-<a href="contact.html" class="nav-contact-btn">Contact us</a>
+<div class="nav-links-desktop" id="nav-links-desktop">
+<a href="/" id="nav-home-link" class="nav-desktop-link">Home</a>
+<a href="https://suhaib.org/process" class="nav-desktop-link">Process</a>
+<a href="https://suhaibpro.com" class="nav-desktop-link">About</a>
+<span class="nav-desktop-divider" aria-hidden="true"></span>
+<a href="https://suhaib.org/contact" class="nav-desktop-link nav-desktop-link-contact">Contact</a>
+</div>
+<button id="menu-toggle" class="nav-icon" aria-label="Menu">
+<span class="menu-icon-wrap">
+<span class="menu-bar menu-bar-1"></span>
+<span class="menu-bar menu-bar-2"></span>
+</span>
+</button>
 </div>
 </nav>
 
-<main>
-<!-- SB HERO — pinned just below the navbar -->
-<section id="hero" class="hero-section">
-<div class="hero-bg">
-<video class="hero-bg-video protected-img" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" poster="assets/images/hero.jpg" draggable="false">
-<source src="assets/images/hero.mp4">
-</video>
-<div class="protected-shield" aria-hidden="true"></div>
+<!-- SuhaiB's mobile full slide-down menu panel (below 960px only) -->
+<div id="menu-overlay">
+<ul class="menu-links-full">
+<li><a href="/" id="menu-home-link" class="menu-nav-link">Home</a></li>
+<li><a href="https://suhaib.org/process" class="menu-nav-link">Process</a></li>
+<li><a href="https://suhaibpro.com" class="menu-nav-link">About</a></li>
+<li><a href="https://suhaib.org/contact" class="menu-nav-link">Contact</a></li>
+</ul>
+<div class="menu-legal-row">
+<a href="https://suhaib.org/privacy">Privacy</a>
+<span class="menu-legal-sep">&amp;</span>
+<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
 </div>
-<div class="hero-scrim"></div>
-<div class="glow-bg"></div>
-<div class="scroll-indicator"><span></span></div>
-</section>
+</div>
 
-<div class="hero-content-wrapper">
-<div class="hero-left-block">
-<h1 class="hero-heading" id="hero-heading">
-<span class="hero-badge-box" aria-hidden="true">
+<main>
+
+<!-- SB HERO — badge, headline (4 lines mobile / ≤3 desktop), sub-head (3 lines),
+     per-word meta line, then a plain "View about us" line. Fades in on load. -->
+<section id="hero" class="hero-section">
+<div class="hero-inner">
+
+<span class="hero-badge-box reveal-load-item" aria-hidden="true">
 <span class="hero-badge-left">SB&trade;</span>
 <span class="hero-badge-right"><span class="hero-badge-cell">DES</span><span class="hero-badge-cell">CRF</span></span>
 </span>
-<span class="hero-heading-line">Designed to endure.<span class="hero-signature">kinG</span></span>
+
+<h1 class="hero-heading reveal-load-item">
+<span class="hero-heading-mobile">We create digital<br>experiences that feel simple,<br>work beautifully,<br>and stay with you.</span><span class="hero-heading-desktop">We create digital experiences<br>that feel simple, work beautifully,<br>and stay with you.</span>
 </h1>
-<p class="hero-heading-desc">Elegant interfaces. Thoughtful motion. Lasting impact.</p>
+
+<p class="hero-heading-desc reveal-load-item">Websites, interfaces, and digital products shaped<br>with thoughtful design, clean technology,<br>and careful detail.</p>
+
+<p class="hero-meta reveal-load-item">
+<span class="hero-meta-word">Independent</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Design</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Development</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Branding</span>
+</p>
+
+<p class="hero-view-row reveal-load-item">
+<span class="hero-view-label">View</span>
+<a href="https://suhaibpro.com" class="hero-view-link" id="hero-about-link">about us <span class="hero-view-arrow">↗</span></a>
+</p>
+
 </div>
-</div>
+</section>
+
+<!-- SB MAIN IMAGE — full-bleed, edge to edge, protected, fades in over ~1.8s, inverts for light theme -->
+<section class="hero-image-section">
+<img src="assets/images/main.jpg" alt="" class="hero-main-img protected-img" loading="eager" fetchpriority="high" decoding="async" draggable="false">
+<div class="protected-shield" aria-hidden="true"></div>
+</section>
 
 <div class="page-body">
+
+<div class="thin-divider"></div>
+
+<!-- SB IMPACT STATEMENT — full width edge to edge, fewer lines on desktop, more on mobile -->
+<section id="impact" class="impact-section reveal">
+<h2 class="impact-heading reveal-item">Built for the web. Designed to matter.</h2>
+<p class="impact-text reveal-item">We bring together design, development, and technology to create digital experiences that are fast, purposeful, and built with lasting attention to detail.</p>
+</section>
+
+<!-- SB CAPABILITIES — four tall cards, swipeable (~1.2 visible mobile, ~2.5–3 desktop) -->
+<section id="capabilities" class="capabilities-section reveal">
+<div class="capabilities-scroll reveal-item" id="capabilities-scroll">
+
+<article class="capability-card">
+<div class="capability-visual capability-visual-design" aria-hidden="true">
+<span class="cv-bar cv-bar-1"></span>
+<span class="cv-bar cv-bar-2"></span>
+<span class="cv-bar cv-bar-3"></span>
+<span class="cv-bar cv-bar-4"></span>
+</div>
+<h3 class="capability-title">01 — Digital Design</h3>
+<p class="capability-desc">Interfaces shaped around hierarchy, rhythm, typography, motion, and clarity. Every element has a purpose, from the smallest interaction to the overall visual system.</p>
+</article>
+
+<article class="capability-card">
+<div class="capability-visual capability-visual-web" aria-hidden="true">
+<div class="cv-browser">
+<span class="cv-dot"></span><span class="cv-dot"></span><span class="cv-dot"></span>
+<span class="cv-browser-line cv-line-1"></span>
+<span class="cv-browser-line cv-line-2"></span>
+</div>
+</div>
+<h3 class="capability-title">02 — Web Experiences</h3>
+<p class="capability-desc">Fast, responsive websites designed to feel effortless across phones, desktops, and larger screens. Built with attention to performance, structure, accessibility, and detail.</p>
+</article>
+
+<article class="capability-card">
+<div class="capability-visual capability-visual-systems" aria-hidden="true">
+<span class="cv-flow-ring"></span>
+<span class="cv-flow-ring cv-flow-ring-2"></span>
+</div>
+<h3 class="capability-title">03 — Visual Systems</h3>
+<p class="capability-desc">Distinctive visual languages built through typography, imagery, composition, motion, and interaction. A consistent system that gives every experience its own character.</p>
+</article>
+
+<article class="capability-card">
+<div class="capability-visual capability-visual-dev" aria-hidden="true">
+<button class="cv-stack-bar" type="button" aria-label="Front-end development"></button>
+<button class="cv-stack-bar" type="button" aria-label="Interaction design"></button>
+<button class="cv-stack-bar" type="button" aria-label="Animation"></button>
+<button class="cv-stack-bar cv-stack-active" type="button" aria-label="Technical experimentation"></button>
+<button class="cv-stack-bar" type="button" aria-label="Development"></button>
+</div>
+<h3 class="capability-title">04 — Creative Development</h3>
+<p class="capability-desc">Turning ideas into functioning digital experiences through thoughtful front-end development, interaction design, animation, and technical experimentation.</p>
+</article>
+
+</div>
+</section>
+
+<div class="thin-divider"></div>
+
+<!-- SB FEATURE PAIR — Airbeats / Airstream, each always big and full width -->
+<section id="feature-pair" class="feature-pair-section reveal">
+
+<div class="feature-pair-col reveal-item" id="feature-airbeats">
+<h2 class="feature-heading"><span class="feature-highlight">Fast, lightweight, and designed</span> for uninterrupted listening.</h2>
+<a href="https://airbeats.app/" target="_blank" rel="noopener" class="feature-banner">
+<img src="assets/images/sb1.jpg" alt="" class="feature-banner-img" loading="lazy" decoding="async">
+</a>
+<p class="feature-description">Enjoy music without ads or interruptions. Built for pure listening.</p>
+</div>
+
+<div class="feature-pair-col reveal-item" id="feature-airstream">
+<h2 class="feature-heading">Without <span class="feature-highlight">Distractions,</span> Built for Better Watching.</h2>
+<a href="https://airstream.stormx.pw/" target="_blank" rel="noopener" class="feature-banner">
+<img src="assets/images/sb2.jpg" alt="" class="feature-banner-img" loading="lazy" decoding="async">
+</a>
+<p class="feature-description">Watch videos in a clean, distraction-free experience. Built for seamless viewing.</p>
+</div>
+
+</section>
+
+<div class="thin-divider"></div>
+
+<!-- SB CONNECT — "Let's work together", Get in touch, email + telegram pills -->
+<section id="connect" class="connect-section reveal">
+
+<div class="connect-header reveal-item">
+<div class="connect-brand-row">
+<img src="assets/images/logo.png" alt="" class="connect-avatar protected-img" draggable="false">
+<span class="connect-tagline">Creating today. Shaping what&rsquo;s next.</span>
+</div>
+<span class="connect-corner-arrow" aria-hidden="true">↙</span>
+</div>
+
+<h2 class="connect-heading reveal-item">Let&rsquo;s work together</h2>
+
+<div class="connect-line-row reveal-item">
+<span class="connect-line"></span>
+<a href="https://suhaib.org/contact" class="round-btn round-btn-connect" id="connect-contact-btn"><span>Get in touch</span></a>
+<span class="connect-line"></span>
+</div>
+
+<div class="connect-pills reveal-item">
+<a href="mailto:contact@suhaib.org" class="connect-pill" id="connect-email-pill">contact@suhaib.org</a>
+<a href="https://t.me/593979487030" target="_blank" rel="noopener" class="connect-pill" id="connect-tel-pill">+593 979487030</a>
+</div>
+
+</section>
+
+<div class="thin-divider"></div>
 
 <!-- SB HERO 2 — full image, no cropping -->
 <section id="hero2" class="hero2-section">
@@ -64,13 +213,40 @@
 <div class="protected-shield" aria-hidden="true"></div>
 </section>
 
+<!-- LEGAL TEXT — full width, sits just above the footer. Links removed, plain text only. -->
+<div class="legal-block legal-block-tight">
+  <p>This is the official website of SB, created as the central home for web design, digital experiences, creative development, and visual work. It brings together the different areas of creativity and technology that define SB, with a focus on thoughtful design, strong visual direction, intuitive experiences, and carefully developed digital work.</p>
+
+<p>SB is focused on designing and building for the web. This includes website design, interface design, front-end development, interaction, animation, creative technology, and other forms of digital creation. The work combines design and technology to create experiences that are visually distinctive while remaining clear, responsive, functional, and enjoyable to use.</p>
+
+<p>Design is at the centre of everything created through SB. Typography, composition, spacing, movement, colour, imagery, interaction, and structure are considered together rather than as separate elements. The intention is to create digital experiences that feel natural and purposeful, where visual quality and usability support each other instead of competing for attention.</p>
+
+<p>Development is equally important to the way SB works. Websites and digital experiences are built with attention to responsiveness, performance, accessibility, interaction, and technical detail. The aim is to make technology feel natural within the experience, allowing the design to remain clear while the underlying systems provide the functionality required to make everything work smoothly.</p>
+
+<p>SB also explores digital art, visual design, motion, creative coding, photography, music, wallpapers, videos, and other forms of digital creativity. These areas provide additional ways to explore ideas, visual language, technology, and expression while remaining connected to the wider focus on design and digital experiences.</p>
+
+<p>The approach behind SB is based on continuous refinement. Design decisions are questioned, details are adjusted, and ideas are developed through observation, learning, testing, and iteration. Simplicity, clarity, curiosity, precision, and attention to detail remain important throughout this process.</p>
+
+<p>This website may also feature selected recommendations, useful resources, services, tools, and other things that may be valuable or interesting to visitors. Such recommendations are provided independently and may lead to websites or services operated by their respective owners. Their content, availability, pricing, privacy practices, and policies remain under the responsibility of those owners.</p>
+
+<p>Alongside its main focus on design and development, SB may continue to introduce new forms of digital creativity as new ideas and interests develop. The website itself may therefore change over time, with its content, appearance, features, and available experiences being refined as the direction of SB continues to evolve.</p>
+
+<p>Every reasonable effort is made to keep the information presented throughout this website accurate, relevant, and up to date. However, information, external resources, recommendations, technical details, availability, compatibility, and other website content may change over time. The experience of using certain features may also vary depending on the device, browser, operating system, software, screen size, and internet connection being used.</p>
+
+<p>This website serves as the official digital home of SB, providing a place to discover what SB creates, how design and technology come together, and the different forms of digital work associated with the name. It is intended to remain a clear and evolving representation of SB and its continued focus on creating thoughtful, distinctive, and well-crafted experiences for the web.</p>
+</div>
+
+<div class="footer-divider-full"></div>
+
+<!-- kinG FOOTER -->
 <footer class="site-footer">
 <div class="footer-statement">
-<div class="footer-signature-wrap">
-<img src="assets/images/lastsb.png" alt="SB" class="footer-signature protected-img" draggable="false">
-<div class="protected-shield" aria-hidden="true"></div>
+<p class="footer-tagline"><span class="footer-tagline-cap">INSPIRED</span> <span class="footer-tagline-thin">by the</span> <span class="footer-tagline-cap">IMPOSSIBLE</span></p>
+<p class="footer-credit">Est. 2024</p>
+<div class="footer-legal-row">
+<a href="https://suhaib.org/licensing">Legal</a>
+<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
 </div>
-<p class="footer-tagline"><span class="footer-tagline-bold">INSPIRED</span> <span class="footer-tagline-thin">by the</span> <span class="footer-tagline-bold">IMPOSSIBLE</span></p>
 </div>
 </footer>
 
