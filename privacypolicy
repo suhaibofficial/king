@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Privacy Policy | SB</title>
+<meta name="color-scheme" content="dark light">
+
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav id="navbar">
+<div class="nav-left">
+<img src="assets/images/logo.png" alt="SB" class="nav-logo protected-img" draggable="false">
+<div class="protected-shield protected-shield-logo" aria-hidden="true"></div>
+</div>
+
+<div class="nav-right">
+<div class="nav-links-desktop" id="nav-links-desktop">
+<a href="/" id="nav-home-link" class="nav-desktop-link">Home</a>
+<a href="https://suhaib.org/process" class="nav-desktop-link">Process</a>
+<a href="https://suhaibpro.com" class="nav-desktop-link">About</a>
+<span class="nav-desktop-divider" aria-hidden="true"></span>
+<a href="https://suhaib.org/contact" class="nav-desktop-link nav-desktop-link-contact">Contact</a>
+</div>
+<button id="menu-toggle" class="nav-icon" aria-label="Menu">
+<span class="menu-icon-wrap">
+<span class="menu-bar menu-bar-1"></span>
+<span class="menu-bar menu-bar-2"></span>
+</span>
+</button>
+</div>
+</nav>
+
+<div id="menu-overlay">
+<ul class="menu-links-full">
+<li><a href="/" id="menu-home-link" class="menu-nav-link">Home</a></li>
+<li><a href="https://suhaib.org/process" class="menu-nav-link">Process</a></li>
+<li><a href="https://suhaibpro.com" class="menu-nav-link">About</a></li>
+<li><a href="https://suhaib.org/contact" class="menu-nav-link">Contact</a></li>
+</ul>
+<div class="menu-legal-row">
+<a href="https://suhaib.org/privacy">Privacy</a>
+<span class="menu-legal-sep">&amp;</span>
+<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
+</div>
+</div>
+
+<main>
+<div class="page-body">
+
+<a href="/" class="back-link">&larr; Back to home</a>
+
+<section class="page-hero">
+<h1>Privacy Policy</h1>
+</section>
+
+<section class="page-content">
+<p>Your privacy matters to SB. This Privacy Policy explains what information may be collected when you visit and interact with this website, how that information may be used, and the choices available to you.</p>
+
+<p>SB does not intentionally collect personal information simply because you visit the website. You may browse and explore most of the website without providing information that directly identifies you. Certain features, forms, external services, or interactions may require information to be provided voluntarily.</p>
+
+<p>When information is voluntarily submitted through contact forms, support requests, feedback, or other communication features, it may include details such as your name, email address, message, or other information you choose to provide. This information is used only for the purpose for which it was provided, such as responding to an inquiry, providing support, or communicating with you.</p>
+
+<p>This website may use basic technical information to maintain security, improve performance, understand general usage, and ensure that the website functions correctly. Depending on the technologies and services used, this may include information such as browser type, device type, approximate location, pages visited, referring pages, and general technical information.</p>
+
+<p>SB may occasionally use third-party services for hosting, analytics, embedded content, forms, recommendations, external resources, or other website functionality. These services may process information according to their own privacy policies and terms. SB does not control the privacy practices of independent third-party services.</p>
+
+<p>This website may contain links to external websites and services. Once you leave this website, the privacy practices and policies of the external service apply. Visitors should review the privacy policies of external websites before providing personal information or using their services.</p>
+
+<p>SB does not intentionally request or collect sensitive personal information through this website. Visitors should avoid submitting passwords, payment information, government identification numbers, or other highly sensitive information through general contact or communication features.</p>
+
+<p>Reasonable measures are taken to protect information submitted through this website. However, no internet-based system can be guaranteed to be completely secure, and SB cannot guarantee absolute security of information transmitted online.</p>
+
+<p>This Privacy Policy may be updated when the website, technologies, features, or applicable requirements change. Any updated version will be made available through this website.</p>
+
+<p>If you have questions regarding this Privacy Policy or the way information is handled through this website, you may contact SB through the available contact channel.</p>
+</section>
+
+<div class="footer-divider-full"></div>
+
+<footer class="site-footer">
+<div class="footer-statement">
+<p class="footer-tagline"><span class="footer-tagline-cap">INSPIRED</span> <span class="footer-tagline-thin">by the</span> <span class="footer-tagline-cap">IMPOSSIBLE</span></p>
+<p class="footer-credit">Est. 2024</p>
+<div class="footer-legal-row">
+<a href="https://suhaib.org/licensing">Legal</a>
+<a href="https://suhaib.org/privacy">Privacy</a>
+<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
+</div>
+</div>
+</footer>
+
+</div>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
