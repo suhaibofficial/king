@@ -34,12 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
   }
 
-  // --- SB desktop nav: Process / About / Contact are always visible; "Home"
-  //     alone fades in once the main hero image has fully scrolled past. ---
+  // --- SB desktop nav: Process / About / Contact are always visible; on the
+  //     homepage "Home" alone fades in once the main hero image has scrolled
+  //     past. Pages with no hero image (Privacy, Terms, etc.) show it right away. ---
   (function initHomeLinkReveal() {
     const heroImageSection = document.querySelector('.hero-image-section');
     const navHomeLink = document.getElementById('nav-home-link');
-    if (!heroImageSection || !navHomeLink) return;
+    if (!navHomeLink) return;
+    if (!heroImageSection) { navHomeLink.classList.add('nav-home-visible'); return; }
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const scrolledPast = entry.boundingClientRect.bottom < 0;
