@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Terms &amp; Licensing | SB</title>
+<meta name="color-scheme" content="dark light">
+
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav id="navbar">
+<div class="nav-left">
+<img src="assets/images/logo.png" alt="SB" class="nav-logo protected-img" draggable="false">
+<div class="protected-shield protected-shield-logo" aria-hidden="true"></div>
+</div>
+
+<div class="nav-right">
+<div class="nav-links-desktop" id="nav-links-desktop">
+<a href="/" id="nav-home-link" class="nav-desktop-link">Home</a>
+<a href="https://suhaib.org/process" class="nav-desktop-link">Process</a>
+<a href="https://suhaibpro.com" class="nav-desktop-link">About</a>
+<span class="nav-desktop-divider" aria-hidden="true"></span>
+<a href="https://suhaib.org/contact" class="nav-desktop-link nav-desktop-link-contact">Contact</a>
+</div>
+<button id="menu-toggle" class="nav-icon" aria-label="Menu">
+<span class="menu-icon-wrap">
+<span class="menu-bar menu-bar-1"></span>
+<span class="menu-bar menu-bar-2"></span>
+</span>
+</button>
+</div>
+</nav>
+
+<div id="menu-overlay">
+<ul class="menu-links-full">
+<li><a href="/" id="menu-home-link" class="menu-nav-link">Home</a></li>
+<li><a href="https://suhaib.org/process" class="menu-nav-link">Process</a></li>
+<li><a href="https://suhaibpro.com" class="menu-nav-link">About</a></li>
+<li><a href="https://suhaib.org/contact" class="menu-nav-link">Contact</a></li>
+</ul>
+<div class="menu-legal-row">
+<a href="https://suhaib.org/privacy">Privacy</a>
+<span class="menu-legal-sep">&amp;</span>
+<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
+</div>
+</div>
+
+<main>
+<div class="page-body">
+
+<a href="/" class="back-link">&larr; Back to home</a>
+
+<section class="page-hero">
+<h1>Terms &amp; Licensing</h1>
+</section>
+
+<section class="page-content">
+<p>By accessing or using this website, you agree to use it responsibly and in accordance with these Terms &amp; Licensing conditions. If you do not agree with these conditions, please discontinue use of the website.</p>
+
+<p>This website serves as the official digital home of SB and may contain websites, interface designs, visual artwork, photographs, wallpapers, videos, music, written material, animations, code, recommendations, interactive experiences, and other digital content created, presented, or shared through SB.</p>
+
+<p>The website and its content are provided for informational, creative, and exploratory purposes. SB makes reasonable efforts to keep the website functional, accurate, and available, but content, features, external resources, technologies, and other aspects of the website may change, improve, become temporarily unavailable, or be removed as development continues.</p>
+
+<p>Visitors may access and view the website for lawful personal purposes. You must not attempt to interfere with the website, gain unauthorized access to its systems, introduce malicious software, misuse its features, copy its structure for deceptive purposes, or otherwise compromise the security, availability, or integrity of the website.</p>
+
+<p>Unless a different license or permission is clearly provided, original content created by SB remains protected by applicable intellectual property laws. This includes original designs, graphics, photographs, wallpapers, videos, music, written content, website interfaces, animations, code, branding, logos, illustrations, and other creative material made available through the website.</p>
+
+<p>Accessing, viewing, or downloading content does not transfer ownership, copyright, intellectual property rights, or commercial rights to the person accessing that content. Unless specifically permitted, content may not be reproduced, copied, modified, republished, redistributed, resold, sublicensed, commercially exploited, uploaded to another platform, or presented as the work of another person or organization.</p>
+
+<p>Where a specific piece of content is provided under an individual license, the terms of that license apply to that content. Users are responsible for reviewing and following the applicable license before using, modifying, distributing, publishing, or incorporating the material into another work.</p>
+
+<p>Any content clearly identified as free to use, downloadable, or distributed under a particular license may be used only within the permissions and limitations stated for that content. Free access does not automatically mean unrestricted commercial use, redistribution, modification, or resale.</p>
+
+<p>Third-party names, trademarks, logos, products, services, images, and other materials appearing on or referenced by this website remain the property of their respective owners. Their presence does not indicate ownership by SB unless explicitly stated.</p>
+
+<p>This website may contain links to independent third-party websites, services, recommendations, or resources. SB does not control these external services and is not responsible for their content, availability, security, pricing, privacy practices, licensing conditions, or policies. Visitors should review the relevant terms before using external services.</p>
+
+<p>SB reserves the right to modify, restrict, suspend, or discontinue any part of the website or its content when necessary. These Terms &amp; Licensing conditions may also be updated as the website, technologies, content, or requirements evolve.</p>
+
+<p>If you wish to use original SB content beyond the permissions provided with that material, including for commercial purposes, redistribution, publication, incorporation into another product, or other extended use, appropriate permission should be obtained before doing so.</p>
+
+<p>For questions regarding website usage, content permissions, licensing, or other matters covered by these Terms &amp; Licensing conditions, please contact SB through the available contact channel.</p>
+</section>
+
+<div class="footer-divider-full"></div>
+
+<footer class="site-footer">
+<div class="footer-statement">
+<p class="footer-tagline"><span class="footer-tagline-cap">INSPIRED</span> <span class="footer-tagline-thin">by the</span> <span class="footer-tagline-cap">IMPOSSIBLE</span></p>
+<p class="footer-credit">Est. 2024</p>
+<div class="footer-legal-row">
+<a href="https://suhaib.org/licensing">Legal</a>
+<a href="https://suhaib.org/privacy">Privacy</a>
+<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
+</div>
+</div>
+</footer>
+
+</div>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
