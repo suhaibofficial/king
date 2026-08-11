@@ -159,7 +159,7 @@ body.menu-open .nav-logo { opacity: 0; pointer-events: none; }
 /* --- SB's menu icon: minimal, compact two-bar mark (not a raster asset) that
    morphs directly into a small clean X — top bar drops+rotates, bottom bar
    lifts+rotates, meeting at centre. Reverses the same way on close. --- */
-.menu-icon-wrap { position: relative; display: block; width: 19px; height: 13px; }
+.menu-icon-wrap { position: relative; display: block; width: 15px; height: 13px; }
 .menu-bar {
 position: absolute; left: 0; width: 100%; height: 01.09px; border-radius: 2px;
 background: var(--text-primary);
