@@ -166,7 +166,7 @@ background: var(--text-primary);
 transition: top 0.4s var(--ease), transform 0.46s var(--spring);
 }
 .menu-bar-1 { top: 0; }
-.menu-bar-2 { top: 11.4px; }
+.menu-bar-2 { top: 8.4px; }
 body.menu-open .menu-bar-1 { top: 5.7px; transform: rotate(45deg); }
 body.menu-open .menu-bar-2 { top: 5.7px; transform: rotate(-45deg); }
 
