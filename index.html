@@ -6,8 +6,6 @@
 <title>SuhaiB</title>
 <meta name="color-scheme" content="dark light">
 
-<!-- SB preloads the hero image + name mark at highest priority so they paint instantly, no flash -->
-<link rel="preload" as="image" href="assets/images/main.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="assets/images/name.png" fetchpriority="high">
 
 <link rel="stylesheet" href="style.css">
@@ -23,8 +21,6 @@
 <div class="protected-shield protected-shield-logo" aria-hidden="true"></div>
 </div>
 
-<!-- SB nav-right holds both the desktop link row (≥960px, opposite the logo) and the
-     mobile hamburger (<960px) — only one of the two is ever visible at a given width. -->
 <div class="nav-right">
 <div class="nav-links-desktop" id="nav-links-desktop">
 <a href="/" id="nav-home-link" class="nav-desktop-link">Home</a>
@@ -53,14 +49,13 @@
 <div class="menu-legal-row">
 <a href="https://suhaib.org/privacypolicy">Privacy Policy</a>
 <span class="menu-legal-sep">&amp;</span>
-<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
+<a href="https://suhaib.org/termsandconditions">Terms &amp; Conditions</a>
 </div>
 </div>
 
 <main>
 
-<!-- SB HERO — badge, headline (4 lines mobile / ≤3 desktop), sub-head (3 lines),
-     per-word meta line, then a plain "View about us" line. Fades in on load. -->
+<!-- SB HERO — badge, headline, sub-head, meta line, "view about us" line. Fades in on load. -->
 <section id="hero" class="hero-section">
 <div class="hero-inner">
 
@@ -76,7 +71,7 @@
 <p class="hero-heading-desc reveal-load-item">Websites, interfaces, and digital products shaped<br>with thoughtful design, clean technology,<br>and careful detail.</p>
 
 <p class="hero-meta reveal-load-item">
-<span class="hero-meta-sep">·</span> <span class="hero-meta-word">Design</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Development</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Branding</span>
+<span class="hero-meta-word">Web</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Design</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Development</span> <span class="hero-meta-sep">·</span> <span class="hero-meta-word">Branding</span>
 </p>
 
 <p class="hero-view-row reveal-load-item">
@@ -87,10 +82,154 @@
 </div>
 </section>
 
-<!-- SB MAIN IMAGE — full-bleed, edge to edge, protected, fades in over ~1.8s, inverts for light theme -->
-<section class="hero-image-section">
-<img src="assets/images/main.jpg" alt="" class="hero-main-img protected-img" loading="eager" fetchpriority="high" decoding="async" draggable="false">
-<div class="protected-shield" aria-hidden="true"></div>
+<!-- SB CODE MOCKUP — a fully coded recreation of the product UI (no image asset).
+     Sized with CSS container queries so it always exactly fills its container
+     on any screen (see .mock-window in style.css), and switches to a light
+     palette automatically in light mode. -->
+<section class="hero-mock-section">
+<div class="hero-mock-scroll" id="hero-mock-scroll">
+<div class="mock-window" id="mock-window">
+
+<!-- LEFT — sidebar -->
+<div class="mock-pane mock-sidebar">
+<div class="mock-fade-block mock-sidebar-top">
+<div class="mock-brand-row">
+<div class="mock-brand">
+<span class="mock-logo-badge">SB</span>
+<span class="mock-brand-name">suhaib.org</span>
+<svg class="mock-ic mock-ic-sm" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div class="mock-brand-tools">
+<svg class="mock-ic" viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16v4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+<svg class="mock-ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</div>
+</div>
+
+<nav class="mock-nav">
+<span class="mock-nav-item"><svg class="mock-ic" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5M6 10v9h5v-5h2v5h5v-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</span>
+<span class="mock-nav-item"><svg class="mock-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>Process</span>
+<span class="mock-nav-item"><svg class="mock-ic" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>About</span>
+<span class="mock-nav-item mock-nav-active"><svg class="mock-ic" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Contact<svg class="mock-ic mock-ic-sm mock-chevron-open" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</nav>
+
+<div class="mock-subnav-label">IN CONTACT</div>
+<nav class="mock-subnav">
+<span class="mock-subnav-item mock-subnav-active"><svg class="mock-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>Building</span>
+<span class="mock-subnav-item"><svg class="mock-ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12l3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Task</span>
+<span class="mock-subnav-item"><svg class="mock-ic" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7V3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Request</span>
+<span class="mock-subnav-item"><svg class="mock-ic" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="3.4" y="13" width="4" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="16.6" y="13" width="4" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Support</span>
+</nav>
+
+<div class="mock-files-label">FILES</div>
+</div>
+
+<div class="mock-files-loading" id="mock-files-loading">Loading...</div>
+<div class="mock-files" id="mock-files">
+<span class="mock-file-item mock-file-active"><span class="mock-file-icon mock-file-icon-jsx">⚛</span>App.jsx</span>
+<span class="mock-file-item"><span class="mock-file-icon mock-file-icon-jsx">⚛</span>Navbar.jsx</span>
+<span class="mock-file-item"><span class="mock-file-icon mock-file-icon-html">&lt;/&gt;</span>index.html</span>
+<span class="mock-file-item"><span class="mock-file-icon mock-file-icon-css">#</span>styles.css</span>
+<span class="mock-file-item"><span class="mock-file-icon mock-file-icon-js">JS</span>utils.js</span>
+<span class="mock-file-item"><span class="mock-file-icon mock-file-icon-js">JS</span>constants.js</span>
+</div>
+
+<div class="mock-collapse">«</div>
+</div>
+
+<!-- MIDDLE — Contact / Building panel -->
+<div class="mock-pane mock-middle">
+<div class="mock-fade-block mock-middle-top">
+
+<div class="mock-breadcrumb">Contact <span class="mock-crumb-sep">›</span> <span class="mock-crumb-active">Building</span><span class="mock-crumb-dot"></span><span class="mock-crumb-more">•••</span></div>
+
+<div class="mock-hero-row">
+<div class="mock-cube-icon">
+<svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3v9M4 7.5l8 4.5 8-4.5M12 21v-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+</div>
+<div class="mock-hero-copy">
+<h3 class="mock-hero-title">We build perfect, <span class="mock-accent-text">premium</span> websites.</h3>
+<p class="mock-hero-desc">Modern. Fast. Responsive. Built with clean code and attention to every detail.</p>
+</div>
+</div>
+
+<div class="mock-section-label">Activity</div>
+<div class="mock-activity-list">
+<div class="mock-activity-item">
+<span class="mock-activity-icon mock-activity-icon-a"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" fill="currentColor"/></svg></span>
+<span>Planning and structuring the <em>premium React.js</em> website. We create scalable, clean and maintainable code.</span>
+</div>
+<div class="mock-activity-item">
+<span class="mock-activity-icon mock-activity-icon-b"><svg viewBox="0 0 24 24"><path d="M12 21a8 8 0 1 1 8-8c0 2-1 3-3 3h-1a2 2 0 0 0 0 4h0" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="7" r="1" fill="currentColor"/><circle cx="16" cy="10" r="1" fill="currentColor"/></svg></span>
+<span>Designing smooth UI/UX with modern animations. Pixel perfect, minimal and elegant.</span>
+</div>
+<div class="mock-activity-item">
+<span class="mock-activity-icon mock-activity-icon-c"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor"/></svg></span>
+<span>Optimizing performance and responsiveness. Fast loading, SEO friendly and mobile first.</span>
+</div>
+<div class="mock-activity-item">
+<span class="mock-activity-icon mock-activity-icon-d"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+<span>Testing across all devices and browsers. Ensuring a flawless experience everywhere.</span>
+</div>
+</div>
+
+<div class="mock-section-label">Contact</div>
+</div>
+
+<div class="mock-chat" id="mock-chat">
+<div class="mock-chat-msg mock-chat-client">
+<span class="mock-avatar mock-avatar-client">C</span>
+<span class="mock-chat-bubble"><b>Client</b>Hi, I need a premium clothing website built using React.js. It should look modern, fast, and fully responsive across all devices.</span>
+</div>
+<div class="mock-chat-msg mock-chat-us">
+<span class="mock-avatar mock-avatar-us">SB</span>
+<span class="mock-chat-bubble"><b>suhaib.org</b>Got it! I&rsquo;ll build a premium, modern and fully responsive clothing website using React.js. I&rsquo;ll focus on smooth animations, clean UI, high performance and a perfect user experience.</span>
+</div>
+<div class="mock-chat-msg mock-chat-client">
+<span class="mock-avatar mock-avatar-client">C</span>
+<span class="mock-chat-bubble"><b>Client</b>Great! Also make sure the site is SEO friendly, uses latest tech stack, and the code is well structured and maintainable.</span>
+</div>
+<div class="mock-chat-msg mock-chat-us">
+<span class="mock-avatar mock-avatar-us">SB</span>
+<span class="mock-chat-bubble"><b>suhaib.org</b>Sure thing! I&rsquo;ll follow best practices for performance, SEO, and clean code structure. I&rsquo;ll start the setup and share the initial layout shortly.</span>
+</div>
+</div>
+
+<div class="mock-chat-input">Send a message&hellip;<svg class="mock-ic mock-send" viewBox="0 0 24 24"><path d="M3 11l17-8-8 17-2-7-7-2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+</div>
+
+<!-- RIGHT — App.jsx code editor -->
+<div class="mock-pane mock-code">
+<div class="mock-fade-block mock-code-tab-row">
+<span class="mock-code-tab"><span class="mock-file-icon mock-file-icon-jsx">⚛</span>App.jsx<span class="mock-tab-x">×</span></span>
+</div>
+
+<div class="mock-code-body">
+<div class="mock-code-status" id="mock-code-status"></div>
+<pre class="mock-code-lines" id="mock-code-lines"><span class="mock-line"><span class="mock-ln">1</span><span class="mock-kw">import</span> React <span class="mock-kw">from</span> <span class="mock-str">'react'</span>;</span>
+<span class="mock-line"><span class="mock-ln">2</span></span>
+<span class="mock-line"><span class="mock-ln">3</span><span class="mock-kw">const</span> <span class="mock-fn">App</span> = () =&gt; {</span>
+<span class="mock-line"><span class="mock-ln">4</span>&nbsp;&nbsp;<span class="mock-kw">return</span> (</span>
+<span class="mock-line"><span class="mock-ln">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;div</span> <span class="mock-attr">className</span>=<span class="mock-str">"min-h-screen bg-black"</span><span class="mock-tag">&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;header</span> <span class="mock-attr">className</span>=<span class="mock-str">"px-6 py-4 flex</span></span>
+<span class="mock-line"><span class="mock-ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-str">items-center justify-between"</span><span class="mock-tag">&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;div</span> <span class="mock-attr">className</span>=<span class="mock-str">"text-xl font-bold</span></span>
+<span class="mock-line"><span class="mock-ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-str">text-white"</span><span class="mock-tag">&gt;</span>suhaib.org<span class="mock-tag">&lt;/div&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;nav</span> <span class="mock-attr">className</span>=<span class="mock-str">"space-x-6 text-gray-300"</span><span class="mock-tag">&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;a</span> <span class="mock-attr">href</span>=<span class="mock-str">"#"</span> <span class="mock-attr">className</span>=<span class="mock-str">"hover:text-white"</span><span class="mock-tag">&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home<span class="mock-tag">&lt;/a&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;a</span> <span class="mock-attr">href</span>=<span class="mock-str">"#"</span> <span class="mock-attr">className</span>=<span class="mock-str">"hover:text-white"</span><span class="mock-tag">&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact<span class="mock-tag">&lt;/a&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;/nav&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;/header&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">17</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="mock-tag">&lt;/div&gt;</span></span>
+<span class="mock-line"><span class="mock-ln">18</span>&nbsp;&nbsp;);</span>
+<span class="mock-line"><span class="mock-ln">19</span>};</span>
+<span class="mock-line"><span class="mock-ln">20</span><span class="mock-kw">export</span> <span class="mock-kw">default</span> App;</span></pre>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
 <div class="page-body">
@@ -101,6 +240,10 @@
 <section id="impact" class="impact-section reveal">
 <h2 class="impact-heading reveal-item">Built for the web. Designed to matter.</h2>
 <p class="impact-text reveal-item">We bring together design, development, and technology to create digital experiences that are fast, purposeful, and built with lasting attention to detail.</p>
+<p class="impact-view-row hero-view-row reveal-item">
+<span class="hero-view-label">View</span>
+<a href="https://suhaib.org/process" class="hero-view-link">process <span class="hero-view-arrow">↗</span></a>
+</p>
 </section>
 
 <!-- SB CAPABILITIES — four tall cards, swipeable (~1.2 visible mobile, ~2.5–3 desktop) -->
@@ -124,6 +267,7 @@
 <span class="cv-dot"></span><span class="cv-dot"></span><span class="cv-dot"></span>
 <span class="cv-browser-line cv-line-1"></span>
 <span class="cv-browser-line cv-line-2"></span>
+<span class="cv-browser-line cv-line-3"></span>
 </div>
 </div>
 <h3 class="capability-title">Web Experiences</h3>
@@ -132,8 +276,12 @@
 
 <article class="capability-card">
 <div class="capability-visual capability-visual-systems" aria-hidden="true">
-<span class="cv-flow-ring"></span>
-<span class="cv-flow-ring cv-flow-ring-2"></span>
+<button class="cv-eq-bar" type="button" aria-label="Typography"></button>
+<button class="cv-eq-bar" type="button" aria-label="Imagery"></button>
+<button class="cv-eq-bar cv-eq-active" type="button" aria-label="Composition"></button>
+<button class="cv-eq-bar" type="button" aria-label="Motion"></button>
+<button class="cv-eq-bar" type="button" aria-label="Interaction"></button>
+<button class="cv-eq-bar" type="button" aria-label="Character"></button>
 </div>
 <h3 class="capability-title">Visual Systems</h3>
 <p class="capability-desc">Distinctive visual languages built through typography, imagery, composition, motion, and interaction. A consistent system that gives every experience its own character.</p>
@@ -141,11 +289,13 @@
 
 <article class="capability-card">
 <div class="capability-visual capability-visual-dev" aria-hidden="true">
-<button class="cv-stack-bar" type="button" aria-label="Front-end development"></button>
-<button class="cv-stack-bar" type="button" aria-label="Interaction design"></button>
-<button class="cv-stack-bar" type="button" aria-label="Animation"></button>
-<button class="cv-stack-bar cv-stack-active" type="button" aria-label="Technical experimentation"></button>
-<button class="cv-stack-bar" type="button" aria-label="Development"></button>
+<div class="cv-term">
+<div class="cv-term-bar"><span></span><span></span><span></span></div>
+<div class="cv-term-body">
+<div class="cv-term-line"><span class="cv-term-kw">const</span> <span class="cv-term-fn">build</span> = () =&gt;</div>
+<div class="cv-term-line cv-term-indent">create<span class="cv-term-cursor">▍</span></div>
+</div>
+</div>
 </div>
 <h3 class="capability-title">Creative Development</h3>
 <p class="capability-desc">Turning ideas into functioning digital experiences through thoughtful front-end development, interaction design, animation, and technical experimentation.</p>
@@ -200,7 +350,7 @@
 
 <div class="connect-pills reveal-item">
 <a href="mailto:contact@suhaib.org" class="connect-pill" id="connect-email-pill">contact@suhaib.org</a>
-<a href="https://t.me/+593979487030" target="_blank" rel="noopener" class="connect-pill" id="connect-tel-pill">+593 979487030</a>
+<a href="https://t.me/593979XXXXXX" target="_blank" rel="noopener" class="connect-pill" id="connect-tel-pill">+593 979XXXXXX</a>
 </div>
 
 </section>
@@ -215,7 +365,8 @@
 
 <!-- LEGAL TEXT — full width, sits just above the footer. Links removed, plain text only. -->
 <div class="legal-block legal-block-tight">
-  <p>This is the official website of SB, created as the central home for web design, digital experiences, creative development, and visual work. It brings together the different areas of creativity and technology that define SB, with a focus on thoughtful design, strong visual direction, intuitive experiences, and carefully developed digital work.</p>
+ website improvements, and new ideas that become part of SB.</p>
+<p>This is the official website of SB, created as the central home for web design, digital experiences, creative development, and visual work. It brings together the different areas of creativity and technology that define SB, with a focus on thoughtful design, strong visual direction, intuitive experiences, and carefully developed digital work.</p>
 
 <p>SB is focused on designing and building for the web. This includes website design, interface design, front-end development, interaction, animation, creative technology, and other forms of digital creation. The work combines design and technology to create experiences that are visually distinctive while remaining clear, responsive, functional, and enjoyable to use.</p>
 
@@ -242,10 +393,11 @@
 <footer class="site-footer">
 <div class="footer-statement">
 <p class="footer-tagline"><span class="footer-tagline-cap">INSPIRED</span> <span class="footer-tagline-thin">by the</span> <span class="footer-tagline-cap">IMPOSSIBLE</span></p>
-<p class="footer-credit">Est. 2024</p>
+<p class="footer-credit">Since 2024 Est.</p>
 <div class="footer-legal-row">
 <a href="https://suhaib.org/privacypolicy">Privacy Policy</a>
-<a href="https://suhaib.org/termsandlicensing">Terms &amp; Licensing</a>
+<span class="footer-legal-sep">&amp;</span>
+<a href="https://suhaib.org/termsandconditions">Terms &amp; Conditions</a>
 </div>
 </div>
 </footer>
