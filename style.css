@@ -98,7 +98,7 @@ scroll-behavior: auto !important;
 ::-webkit-scrollbar-track { background: var(--scroll-track); }
 ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 10px; }
 
-/* --- SB image protection (logo, main image, hero2) ---
+/* --- SB image protection (logo, hero2) ---
    Lightweight, client-side deterrents only — not foolproof, as none of these
    ever fully are, but enough to stop casual right-click-save / drag-out. */
 .protected-img {
@@ -140,8 +140,6 @@ backface-visibility: hidden;
 .nav-left { position: relative; display: flex; align-items: center; }
 #navbar.scrolled { background: var(--nav-bg-scrolled); }
 .nav-logo { height: 30px; width: auto; object-fit: contain; filter: var(--logo-filter); }
-/* nav-right holds the desktop link row and the hamburger — only one shows at a time,
-   and both live on the right, opposite the logo. */
 .nav-right { display: flex; align-items: center; gap: 10px; }
 @media (min-width: 960px) {
 #menu-toggle { display: none; }
@@ -156,23 +154,23 @@ body.menu-open .nav-logo { opacity: 0; pointer-events: none; }
 .icon-img { width: 24px; height: 24px; }
 }
 
-/* --- SB's menu icon: minimal, compact two-bar mark (not a raster asset) that
+/* --- SB's menu icon: a minimal, compact two-bar mark, thin and small, that
    morphs directly into a small clean X — top bar drops+rotates, bottom bar
    lifts+rotates, meeting at centre. Reverses the same way on close. --- */
-.menu-icon-wrap { position: relative; display: block; width: 15px; height: 13px; }
+.menu-icon-wrap { position: relative; display: block; width: 13px; height: 11px; }
 .menu-bar {
-position: absolute; left: 0; width: 100%; height: 01.09px; border-radius: 2px;
+position: absolute; left: 0; width: 100%; height: 1.2px; border-radius: 2px;
 background: var(--text-primary);
 transition: top 0.4s var(--ease), transform 0.46s var(--spring);
 }
 .menu-bar-1 { top: 0; }
-.menu-bar-2 { top: 8.4px; }
-body.menu-open .menu-bar-1 { top: 5.7px; transform: rotate(45deg); }
-body.menu-open .menu-bar-2 { top: 5.7px; transform: rotate(-45deg); }
+.menu-bar-2 { top: 7.8px; }
+body.menu-open .menu-bar-1 { top: 4.9px; transform: rotate(45deg); }
+body.menu-open .menu-bar-2 { top: 4.9px; transform: rotate(-45deg); }
 
 /* --- SB's desktop inline nav: Home / Process / About | Contact — sits on the
    right, opposite the logo. Process / About / Contact are always visible;
-   Home alone stays hidden until the main hero image has scrolled past
+   Home alone stays hidden until the coded mockup has scrolled past
    (toggled via .nav-home-visible in JS). --- */
 .nav-links-desktop { display: none; }
 @media (min-width: 960px) {
@@ -272,9 +270,6 @@ display: flex; justify-content: center;
 .hero-inner .reveal-load-item:nth-child(4) { transition-delay: 0.5s; }
 .hero-inner .reveal-load-item:nth-child(5) { transition-delay: 0.64s; }
 
-/* SB's SB™ | DES / CRF mark — a bordered box with a vertical divider after the
-   left cell and a horizontal divider between DES and CRF, forming the same
-   T-junction as the reference mark. Sized small, to sit with the headline. */
 .hero-badge-box {
 display: inline-flex; align-items: stretch;
 border: 1.3px solid var(--border-strong); border-radius: 6px;
@@ -301,8 +296,6 @@ font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
 font-size: clamp(1.85rem, 6.6vw, 4rem);
 color: var(--text-primary);
 }
-/* Manual line breaks guarantee the requested line counts regardless of viewport:
-   4 lines below 960px, 3 lines (or fewer) at 960px and up. */
 .hero-heading-desktop { display: none; }
 @media (min-width: 960px) {
 .hero-heading-mobile { display: none; }
@@ -335,21 +328,6 @@ text-transform: uppercase;
 .hero-view-link:hover, .hero-view-link:active, .hero-view-link.is-active { color: var(--text-primary); }
 .hero-view-arrow { display: inline-block; }
 
-/* --- SB main image — full bleed, edge to edge on every screen size, protected.
-   Fades in over ~1.8s once loaded. In light mode the black source flips to
-   white (and its white text/marks flip to black) via invert + hue-rotate,
-   which preserves the colourful accents' hue while swapping luminance. */
-.hero-image-section { position: relative; width: 100%; margin: 0; padding: 0; line-height: 0; background: var(--bg); overflow: hidden; }
-.hero-main-img {
-width: 100%; height: auto; display: block;
-opacity: 0; filter: none; will-change: opacity;
-transition: opacity 1.8s var(--ease-soft), filter 0.5s var(--ease);
-}
-.hero-main-img.media-ready { opacity: 1; }
-@media (prefers-color-scheme: light) {
-.hero-main-img { filter: invert(1) hue-rotate(180deg) contrast(1.08); }
-}
-
 .page-body { position: relative; z-index: 2; background: var(--bg); }
 
 .thin-divider { width: 100%; height: 1px; background: var(--border-subtle); }
@@ -372,9 +350,185 @@ transform: scale(0.97);
 }
 
 /* ============================================
+   SB CODE MOCKUP — a fully coded recreation of the product UI, no image asset.
+   Sized with CSS container queries only (no JS measuring/scaling): the grid
+   columns are percentages of the container, so the mockup always exactly
+   fills the available width on any screen — it can never be swiped and never
+   gets clipped. --mu is a single "mock unit" that shrinks smoothly with the
+   container's own width (via cqw), so every internal size scales together
+   proportionally, capping at full size once the container reaches ~1000px.
+   Colours are CSS variables scoped to .mock-window so light mode flips the
+   whole thing to a light UI while dark mode keeps the original dark one.
+   ============================================ */
+.hero-mock-section {
+width: 100%; display: flex; justify-content: center;
+padding: 0 4vw;
+margin-top: clamp(10px, 1.6vw, 18px);
+margin-bottom: 0;
+}
+.hero-mock-scroll {
+width: 100%; max-width: 1020px;
+container-type: inline-size;
+}
+
+.mock-window {
+--mu: clamp(0.4px, 0.1cqw, 1px);
+--mock-bg: #0a0a0c;
+--mock-bg-2: #111115;
+--mock-bg-3: #17171b;
+--mock-code-bg: #0d0d10;
+--mock-text: #eaeaec;
+--mock-text-dim: #97979f;
+--mock-text-dimmer: #66666d;
+--mock-border: rgba(255,255,255,0.09);
+--mock-blue: #6aa6ff;
+--mock-pink: #f472b6;
+--mock-red: #fb7185;
+--mock-green: #86efac;
+--mock-cyan: #7dd3fc;
+--mock-shadow: 0 22px 60px rgba(0,0,0,0.5);
+display: grid; grid-template-columns: 18.5% 1fr 27%;
+width: 100%;
+background: var(--mock-bg);
+border-radius: calc(var(--mu) * 16);
+border: 1px solid var(--mock-border);
+box-shadow: var(--mock-shadow);
+font-family: 'Inter', sans-serif;
+isolation: isolate;
+overflow: hidden;
+opacity: 0; transform: translateY(22px);
+transition: opacity 1s var(--ease-soft), transform 1s var(--ease-soft);
+will-change: opacity, transform;
+}
+@media (prefers-color-scheme: light) {
+.mock-window {
+--mock-bg: #ffffff;
+--mock-bg-2: #f6f6f8;
+--mock-bg-3: #edeef1;
+--mock-code-bg: #fafafb;
+--mock-text: #131316;
+--mock-text-dim: #6b6b74;
+--mock-text-dimmer: #a4a4ac;
+--mock-border: rgba(0,0,0,0.09);
+--mock-blue: #2563eb;
+--mock-pink: #db2777;
+--mock-red: #dc2626;
+--mock-green: #15803d;
+--mock-cyan: #0e7490;
+--mock-shadow: 0 18px 44px rgba(0,0,0,0.12);
+}
+}
+.mock-window.mock-in { opacity: 1; transform: translateY(0); }
+.mock-window.mock-in .mock-pane { animation: mockNeonIn 1.5s var(--ease-soft) forwards; }
+.mock-pane:nth-child(2) { animation-delay: 0.08s !important; }
+.mock-pane:nth-child(3) { animation-delay: 0.16s !important; }
+@keyframes mockNeonIn {
+0% { box-shadow: inset 0 0 0 1px var(--accent-b), inset 0 0 26px rgba(255,93,162,0.22); }
+100% { box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 rgba(0,0,0,0); }
+}
+
+.mock-pane { position: relative; display: flex; flex-direction: column; color: var(--mock-text-dim); }
+.mock-sidebar { background: var(--mock-bg); border-right: 1px solid var(--mock-border); padding: calc(var(--mu) * 10) calc(var(--mu) * 10); gap: calc(var(--mu) * 2); border-radius: calc(var(--mu) * 16) 0 0 calc(var(--mu) * 16); }
+.mock-middle { background: var(--mock-bg-2); border-right: 1px solid var(--mock-border); padding: calc(var(--mu) * 11) calc(var(--mu) * 16) calc(var(--mu) * 14); }
+.mock-code { background: var(--mock-code-bg); border-radius: 0 calc(var(--mu) * 16) calc(var(--mu) * 16) 0; }
+
+.mock-fade-block { opacity: 0; transform: translateY(6px); transition: opacity 3.4s var(--ease-soft), transform 3.4s var(--ease-soft); }
+.mock-fade-block.mock-fade-in { opacity: 1; transform: translateY(0); }
+
+.mock-ic { width: calc(var(--mu) * 12); height: calc(var(--mu) * 12); flex-shrink: 0; }
+.mock-ic-sm { width: calc(var(--mu) * 9); height: calc(var(--mu) * 9); }
+
+.mock-brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: calc(var(--mu) * 10); }
+.mock-brand { display: flex; align-items: center; gap: calc(var(--mu) * 6); }
+.mock-logo-badge { width: calc(var(--mu) * 19); height: calc(var(--mu) * 19); border-radius: calc(var(--mu) * 5); background: var(--mock-text); color: var(--mock-bg); font-size: calc(var(--mu) * 8.3); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.mock-brand-name { font-size: calc(var(--mu) * 10.9); font-weight: 700; color: var(--mock-text); }
+.mock-brand-tools { display: flex; align-items: center; gap: calc(var(--mu) * 7); color: var(--mock-text-dimmer); }
+
+.mock-nav { display: flex; flex-direction: column; gap: calc(var(--mu) * 1); margin-bottom: calc(var(--mu) * 8); }
+.mock-nav-item { display: flex; align-items: center; gap: calc(var(--mu) * 8); padding: calc(var(--mu) * 4); border-radius: calc(var(--mu) * 7); font-size: calc(var(--mu) * 10.4); font-weight: 500; color: var(--mock-text-dim); }
+.mock-nav-active { background: rgba(128,128,128,0.12); color: var(--mock-text); font-weight: 700; }
+.mock-chevron-open { margin-left: auto; }
+
+.mock-subnav-label, .mock-files-label { font-size: calc(var(--mu) * 8); font-weight: 700; letter-spacing: calc(var(--mu) * 0.8); color: var(--mock-text-dimmer); padding: 0 calc(var(--mu) * 6); margin-bottom: calc(var(--mu) * 4); }
+.mock-subnav { display: flex; flex-direction: column; gap: calc(var(--mu) * 1); margin-bottom: calc(var(--mu) * 8); }
+.mock-subnav-item { display: flex; align-items: center; gap: calc(var(--mu) * 8); padding: calc(var(--mu) * 3.5) calc(var(--mu) * 6); border-radius: calc(var(--mu) * 7); font-size: calc(var(--mu) * 10.1); color: var(--mock-text-dim); }
+.mock-subnav-active { background: rgba(128,128,128,0.12); color: var(--mock-text); font-weight: 600; }
+
+.mock-files-loading { padding: 0 calc(var(--mu) * 6); font-size: calc(var(--mu) * 9.6); color: var(--mock-text-dimmer); opacity: 0; height: 0; overflow: hidden; transition: opacity 0.4s ease; }
+.mock-files-loading.mock-visible { opacity: 1; height: auto; margin-bottom: calc(var(--mu) * 4); }
+.mock-files { display: flex; flex-direction: column; gap: calc(var(--mu) * 1); opacity: 0; transform: translateY(5px); transition: opacity 0.7s var(--ease-soft), transform 0.7s var(--ease-soft); will-change: opacity, transform; }
+.mock-files.mock-visible { opacity: 1; transform: translateY(0); }
+.mock-file-item { display: flex; align-items: center; gap: calc(var(--mu) * 7); padding: calc(var(--mu) * 3.5) calc(var(--mu) * 6); border-radius: calc(var(--mu) * 6); font-size: calc(var(--mu) * 9.9); color: var(--mock-text-dim); }
+.mock-file-active { background: rgba(128,128,128,0.12); color: var(--mock-text); }
+.mock-file-icon { width: calc(var(--mu) * 13); height: calc(var(--mu) * 13); border-radius: calc(var(--mu) * 3); display: flex; align-items: center; justify-content: center; font-size: calc(var(--mu) * 7.4); font-weight: 800; flex-shrink: 0; }
+.mock-file-icon-jsx { background: rgba(106,166,255,0.18); color: var(--mock-blue); }
+.mock-file-icon-html { background: rgba(251,113,133,0.18); color: var(--mock-red); font-size: calc(var(--mu) * 6.4); }
+.mock-file-icon-css { background: rgba(125,211,252,0.18); color: var(--mock-cyan); }
+.mock-file-icon-js { background: rgba(250,204,21,0.18); color: #ca8a04; font-size: calc(var(--mu) * 6.4); }
+
+.mock-collapse { margin-top: auto; padding: calc(var(--mu) * 6); font-size: calc(var(--mu) * 11.5); color: var(--mock-text-dimmer); }
+
+/* --- middle pane --- */
+.mock-breadcrumb { display: flex; align-items: center; gap: calc(var(--mu) * 5); font-size: calc(var(--mu) * 10.2); color: var(--mock-text-dimmer); margin-bottom: calc(var(--mu) * 11); }
+.mock-crumb-active { color: var(--mock-blue); font-weight: 600; }
+.mock-crumb-dot { width: calc(var(--mu) * 5); height: calc(var(--mu) * 5); border-radius: 50%; background: var(--mock-blue); }
+.mock-crumb-more { margin-left: auto; letter-spacing: calc(var(--mu) * 2); }
+
+.mock-hero-row { display: flex; align-items: flex-start; gap: calc(var(--mu) * 11); margin-bottom: calc(var(--mu) * 13); }
+.mock-cube-icon { width: calc(var(--mu) * 34); height: calc(var(--mu) * 34); border-radius: calc(var(--mu) * 10); background: rgba(106,166,255,0.12); border: 1px solid rgba(106,166,255,0.3); color: var(--mock-blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mock-cube-icon svg { width: calc(var(--mu) * 16); height: calc(var(--mu) * 16); }
+.mock-hero-title { font-size: calc(var(--mu) * 15.7); font-weight: 700; color: var(--mock-text); letter-spacing: -0.01em; margin-bottom: calc(var(--mu) * 4); }
+.mock-accent-text { color: var(--mock-blue); }
+.mock-hero-desc { font-size: calc(var(--mu) * 10.6); color: var(--mock-text-dim); line-height: 1.45; }
+
+.mock-section-label { font-size: calc(var(--mu) * 9.3); font-weight: 700; letter-spacing: calc(var(--mu) * 0.4); color: var(--mock-text-dim); margin: calc(var(--mu) * 8) 0 calc(var(--mu) * 5); }
+.mock-activity-list { display: flex; flex-direction: column; gap: calc(var(--mu) * 1); }
+.mock-activity-item { display: flex; align-items: flex-start; gap: calc(var(--mu) * 9); padding: calc(var(--mu) * 4); border-radius: calc(var(--mu) * 8); font-size: calc(var(--mu) * 10.1); line-height: 1.3; color: var(--mock-text-dim); }
+.mock-activity-item em { color: var(--mock-blue); font-style: normal; }
+.mock-activity-icon { width: calc(var(--mu) * 19); height: calc(var(--mu) * 19); border-radius: calc(var(--mu) * 6); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mock-activity-icon svg { width: calc(var(--mu) * 10); height: calc(var(--mu) * 10); }
+.mock-activity-icon-a { background: rgba(106,166,255,0.15); color: var(--mock-blue); }
+.mock-activity-icon-b { background: rgba(244,114,182,0.15); color: var(--mock-pink); }
+.mock-activity-icon-c { background: rgba(250,204,21,0.15); color: #ca8a04; }
+.mock-activity-icon-d { background: rgba(134,239,172,0.15); color: var(--mock-green); }
+
+.mock-chat { display: flex; flex-direction: column; gap: calc(var(--mu) * 7); margin-top: calc(var(--mu) * 2); }
+.mock-chat-msg { display: flex; gap: calc(var(--mu) * 7); align-items: flex-start; opacity: 0; transform: translateY(8px); transition: opacity 0.6s var(--ease-soft), transform 0.6s var(--ease-soft); will-change: opacity, transform; }
+.mock-chat-msg.mock-visible { opacity: 1; transform: translateY(0); }
+.mock-avatar { width: calc(var(--mu) * 18); height: calc(var(--mu) * 18); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: calc(var(--mu) * 7.4); font-weight: 800; flex-shrink: 0; }
+.mock-avatar-client { background: rgba(106,166,255,0.2); color: var(--mock-blue); }
+.mock-avatar-us { background: var(--mock-text); color: var(--mock-bg); }
+.mock-chat-bubble { display: block; background: var(--mock-bg-3); border: 1px solid var(--mock-border); border-radius: calc(var(--mu) * 10); padding: calc(var(--mu) * 6) calc(var(--mu) * 9); font-size: calc(var(--mu) * 9.6); line-height: 1.35; color: var(--mock-text-dim); }
+.mock-chat-bubble b { display: block; font-size: calc(var(--mu) * 9); color: var(--mock-text); margin-bottom: calc(var(--mu) * 1); }
+.mock-chat-input { margin-top: calc(var(--mu) * 10); display: flex; align-items: center; justify-content: space-between; padding: calc(var(--mu) * 7) calc(var(--mu) * 10); border-radius: calc(var(--mu) * 10); border: 1px solid var(--mock-border); background: var(--mock-bg-3); font-size: calc(var(--mu) * 9.6); color: var(--mock-text-dimmer); }
+.mock-send { color: var(--mock-text-dimmer); }
+
+/* --- right pane: code editor --- */
+.mock-code-tab-row { display: flex; border-bottom: 1px solid var(--mock-border); }
+.mock-code-tab { display: flex; align-items: center; gap: calc(var(--mu) * 6); padding: calc(var(--mu) * 7) calc(var(--mu) * 12); font-size: calc(var(--mu) * 9.9); color: var(--mock-text); background: var(--mock-bg-2); border-right: 1px solid var(--mock-border); }
+.mock-tab-x { margin-left: calc(var(--mu) * 4); color: var(--mock-text-dimmer); }
+.mock-code-body { padding: calc(var(--mu) * 9) calc(var(--mu) * 13); overflow: hidden; }
+.mock-code-status { font-size: calc(var(--mu) * 9.9); color: var(--mock-text-dimmer); font-family: 'Courier New', monospace; opacity: 0; height: 0; transition: opacity 0.35s ease; }
+.mock-code-status.mock-visible { opacity: 1; height: auto; margin-bottom: calc(var(--mu) * 4); }
+.mock-code-lines { font-family: 'Courier New', monospace; font-size: calc(var(--mu) * 9.9); line-height: 1.75; white-space: pre; }
+.mock-line { display: block; opacity: 0; transform: translateX(-5px); transition: opacity 0.35s var(--ease-soft), transform 0.35s var(--ease-soft); color: var(--mock-text-dim); will-change: opacity, transform; }
+.mock-line.mock-visible { opacity: 1; transform: translateX(0); }
+.mock-ln { display: inline-block; width: calc(var(--mu) * 17); color: var(--mock-text-dimmer); user-select: none; }
+.mock-kw { color: var(--mock-pink); }
+.mock-fn { color: #ca8a04; }
+.mock-tag { color: var(--mock-red); }
+.mock-attr { color: var(--mock-cyan); }
+.mock-str { color: var(--mock-green); }
+
+/* ============================================
    SB IMPACT STATEMENT — full width, edge to edge
    ============================================ */
-.impact-section { padding: clamp(60px, 8vw, 116px) 6vw clamp(24px, 4vw, 44px); width: 100%; }
+.impact-section { padding: 0.5mm 6vw clamp(24px, 4vw, 44px); width: 100%; }
+/* The divider that used to sit right after the coded mockup is hidden (not
+   removed) so index.html stays untouched — only this specific instance,
+   right after .hero-mock-section, disappears; every other divider on the
+   page is unaffected. */
+.hero-mock-section + .page-body > .thin-divider:first-child { display: none; }
 .impact-heading {
 font-family: 'Inter', sans-serif; font-weight: 800; color: var(--text-primary);
 font-size: clamp(1.7rem, 6vw, 3.4rem); line-height: 1.16; letter-spacing: -0.02em;
@@ -388,18 +542,25 @@ max-width: 62ch;
 @media (min-width: 960px) {
 .impact-heading, .impact-text { max-width: 46ch; }
 }
+.impact-view-row { margin-top: clamp(20px, 2.6vw, 28px); }
 
 /* ============================================
-   SB CAPABILITIES — four swipeable cards
+   SB CAPABILITIES — four swipeable cards, nearly edge to edge
    ============================================ */
 .capabilities-section { padding: clamp(36px, 5vw, 60px) 0 clamp(50px, 7vw, 100px); }
 .capabilities-scroll {
-display: flex; gap: clamp(14px, 2vw, 22px);
+display: flex; gap: clamp(16px, 2vw, 22px);
 overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
-padding: 6px 6vw 14px 6vw;
+-webkit-overflow-scrolling: touch;
+padding: 6px 6vw 14px 0;
 scrollbar-width: none; -ms-overflow-style: none;
 }
 .capabilities-scroll::-webkit-scrollbar { display: none; }
+/* Leading (start-edge) padding on a horizontally-scrolling flex container is
+   unreliable at the initial scroll position in several browsers — it can get
+   ignored entirely, which is why the left gap kept vanishing no matter the
+   padding value. margin-left on the first card sidesteps that bug outright. */
+.capability-card:first-child { margin-left: 6vw; }
 
 .capability-card {
 scroll-snap-align: start; flex: 0 0 auto;
@@ -414,7 +575,8 @@ display: flex; flex-direction: column; gap: clamp(20px, 3vw, 30px);
 .capability-card { width: 52vw; min-height: 420px; }
 }
 @media (min-width: 960px) {
-.capabilities-scroll { padding: 6px 5vw 16px 5vw; }
+.capabilities-scroll { padding: 6px 5vw 16px 0; }
+.capability-card:first-child { margin-left: 5vw; }
 .capability-card { width: clamp(280px, 33vw, 380px); min-height: clamp(420px, 34vw, 500px); }
 }
 
@@ -430,10 +592,9 @@ display: flex; align-items: center; justify-content: center;
 .capability-title { font-size: clamp(1.05rem, 1.6vw, 1.2rem); font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); }
 .capability-desc { font-size: 0.92rem; font-weight: 300; line-height: 1.68; color: var(--text-secondary); }
 
-/* 01 — Digital Design: a small rhythm of bars pulsing width, standing in for
-   hierarchy and typographic rhythm — boosts briefly on tap. */
+/* Digital Design: a small rhythm of bars pulsing width — boosts on tap. */
 .capability-visual-design { flex-direction: column; gap: 9px; padding: 0 24px; align-items: flex-start; }
-.cv-bar { height: 7px; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-b)); }
+.cv-bar { height: 7px; border-radius: 4px; background: linear-gradient(90deg, #ffd23f, #ff5da2, #8b5cf6); }
 .cv-bar-1 { width: 78%; animation: cvBarPulse 4.2s var(--ease) infinite; }
 .cv-bar-2 { width: 46%; animation: cvBarPulse 4.2s var(--ease) infinite 0.3s; }
 .cv-bar-3 { width: 62%; animation: cvBarPulse 4.2s var(--ease) infinite 0.6s; }
@@ -441,51 +602,58 @@ display: flex; align-items: center; justify-content: center;
 @keyframes cvBarPulse { 0%, 100% { opacity: 0.55; transform: scaleX(0.94); } 50% { opacity: 1; transform: scaleX(1); } }
 .capability-visual-design.cv-boost .cv-bar { animation-duration: 1.1s; }
 
-/* 02 — Web Experiences: a simple static browser mock, no motion at all. */
-.cv-browser { width: 74%; border-radius: 8px; border: 1px solid var(--border-medium); overflow: hidden; }
-.cv-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--text-tertiary); margin: 8px 3px 8px 8px; }
-.cv-browser-line { display: block; height: 6px; margin: 0 10px 10px; border-radius: 3px; background: var(--border-medium); }
-.cv-line-1 { width: 70%; }
-.cv-line-2 { width: 45%; }
-
-/* 03 — Visual Systems: a slow, continuous conic sweep — boosts briefly on tap. */
-.cv-flow-ring {
-position: absolute; width: 72px; height: 72px; border-radius: 50%;
-background: conic-gradient(from 0deg, var(--accent), var(--accent-c), var(--accent-b), var(--accent));
--webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-animation: cvRingSpin 5s linear infinite;
+/* Web Experiences: a live browser mock — dots pulse and content lines shimmer
+   continuously, like a page always mid-load. Boosts (speeds up) on tap. */
+.cv-browser { width: 74%; border-radius: 8px; border: 1px solid var(--border-medium); overflow: hidden; padding-bottom: 4px; }
+.cv-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--text-tertiary); margin: 8px 3px 8px 8px; animation: cvDotPulse 2s var(--ease) infinite; }
+.cv-dot:nth-child(2) { animation-delay: 0.25s; }
+.cv-dot:nth-child(3) { animation-delay: 0.5s; }
+@keyframes cvDotPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+.cv-browser-line {
+display: block; height: 6px; margin: 0 10px 10px; border-radius: 3px;
+background: linear-gradient(90deg, var(--border-medium) 20%, var(--accent-b) 42%, var(--accent-c) 50%, var(--border-medium) 68%);
+background-size: 250% 100%;
+animation: cvShimmer 2.8s linear infinite;
 }
-.cv-flow-ring-2 { width: 44px; height: 44px; opacity: 0.55; animation-duration: 3.4s; animation-direction: reverse; }
-@keyframes cvRingSpin { to { transform: rotate(360deg); } }
-.capability-visual-systems.cv-boost .cv-flow-ring { animation-duration: 1.6s; }
-.capability-visual-systems.cv-boost .cv-flow-ring-2 { animation-duration: 1s; }
+.cv-line-2 { animation-delay: 0.35s; }
+.cv-line-3 { width: 55%; animation-delay: 0.7s; }
+@keyframes cvShimmer { 0% { background-position: 120% 0; } 100% { background-position: -120% 0; } }
+.capability-visual-web.cv-boost .cv-browser-line { animation-duration: 0.9s; }
+.capability-visual-web.cv-boost .cv-dot { animation-duration: 0.7s; }
 
-/* 04 — Creative Development: a fanned stack of bars, echoing a stack of build
-   layers. Click one and it rises above the rest; idles with a gentle
-   ambient breathe when untouched. */
-.capability-visual-dev { position: relative; }
-.cv-stack-bar {
-position: absolute; bottom: 20%; left: 22%;
-width: 34px; height: 6px; border-radius: 3px;
-background: linear-gradient(90deg, var(--accent-b), var(--accent));
-transform-origin: left center;
-cursor: pointer;
-transition: transform 0.5s var(--spring), opacity 0.4s var(--ease);
-animation: cvStackBreathe 3.6s var(--ease) infinite;
+/* Visual Systems: bold colourful bars with their own continuous colour sweep.
+   Click one and it rises while the rest settle down. */
+.capability-visual-systems { align-items: flex-end; gap: 10px; padding: 0 0 22px; }
+.cv-eq-bar {
+width: 22px; border-radius: 6px 6px 0 0; cursor: pointer;
+background: linear-gradient(180deg, #22c55e, #ef4444, #3b82f6, #22c55e);
+background-size: 100% 300%;
+animation: cvEqColor 3.6s linear infinite;
+transition: height 0.5s var(--spring), opacity 0.4s var(--ease);
+opacity: 0.78;
 }
-.cv-stack-bar:nth-child(1) { transform: rotate(-36deg) translateX(0) scale(0.68); opacity: 0.5; animation-delay: 0s; }
-.cv-stack-bar:nth-child(2) { transform: rotate(-36deg) translateX(16px) scale(0.8); opacity: 0.62; animation-delay: 0.2s; }
-.cv-stack-bar:nth-child(3) { transform: rotate(-36deg) translateX(32px) scale(0.92); opacity: 0.76; animation-delay: 0.4s; }
-.cv-stack-bar:nth-child(4) { transform: rotate(-36deg) translateX(48px) scale(1.04); opacity: 0.9; animation-delay: 0.6s; }
-.cv-stack-bar:nth-child(5) { transform: rotate(-36deg) translateX(64px) scale(1.16); opacity: 1; animation-delay: 0.8s; }
-.cv-stack-bar.cv-stack-active { opacity: 1 !important; animation: none; }
-.cv-stack-bar:nth-child(1).cv-stack-active { transform: rotate(-36deg) translateX(0) scale(0.68) translateY(-16px); }
-.cv-stack-bar:nth-child(2).cv-stack-active { transform: rotate(-36deg) translateX(16px) scale(0.8) translateY(-16px); }
-.cv-stack-bar:nth-child(3).cv-stack-active { transform: rotate(-36deg) translateX(32px) scale(0.92) translateY(-16px); }
-.cv-stack-bar:nth-child(4).cv-stack-active { transform: rotate(-36deg) translateX(48px) scale(1.04) translateY(-16px); }
-.cv-stack-bar:nth-child(5).cv-stack-active { transform: rotate(-36deg) translateX(64px) scale(1.16) translateY(-16px); }
-@keyframes cvStackBreathe { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.25); } }
+.cv-eq-bar:nth-child(1) { height: 32%; animation-delay: 0s; }
+.cv-eq-bar:nth-child(2) { height: 50%; animation-delay: 0.3s; }
+.cv-eq-bar:nth-child(3) { height: 68%; animation-delay: 0.6s; }
+.cv-eq-bar:nth-child(4) { height: 42%; animation-delay: 0.9s; }
+.cv-eq-bar:nth-child(5) { height: 58%; animation-delay: 1.2s; }
+.cv-eq-bar:nth-child(6) { height: 36%; animation-delay: 1.5s; }
+.cv-eq-bar.cv-eq-active { height: 86% !important; opacity: 1; animation-duration: 1.6s; }
+@keyframes cvEqColor { 0% { background-position: 0 0; } 100% { background-position: 0 300%; } }
+.capability-visual-systems.cv-boost .cv-eq-bar { animation-duration: 1.4s; }
+
+/* Creative Development: a small terminal with a typing cursor. Boosts on tap. */
+.cv-term { width: 78%; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-medium); background: rgba(0,0,0,0.32); }
+.cv-term-bar { display: flex; gap: 5px; padding: 7px 9px; background: rgba(255,255,255,0.03); }
+.cv-term-bar span { width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong); }
+.cv-term-body { padding: 11px 13px; font-family: 'Courier New', monospace; font-size: 0.74rem; line-height: 1.8; }
+.cv-term-line { color: var(--text-secondary); white-space: nowrap; }
+.cv-term-indent { padding-left: 16px; color: var(--text-tertiary); }
+.cv-term-kw { color: var(--accent-b); }
+.cv-term-fn { color: var(--accent-c); }
+.cv-term-cursor { display: inline-block; color: var(--accent); animation: cvCursorBlink 1.1s steps(1) infinite; }
+@keyframes cvCursorBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.capability-visual-dev.cv-boost .cv-term-cursor { animation-duration: 0.3s; }
 
 /* ============================================
    SB FEATURE PAIR — Airbeats / Airstream, always big and full width
@@ -510,9 +678,19 @@ border-radius: 26px; overflow: hidden;
 border: 1px solid var(--border-subtle);
 background: var(--bg-subtle);
 transition: transform 0.4s var(--ease), border-color 0.3s var(--ease);
+-webkit-tap-highlight-color: rgba(0, 122, 255, 0.28);
 }
 .feature-banner:hover { transform: scale(1.005); border-color: var(--border-medium); }
 .feature-banner:active { transform: scale(0.99); transition: transform 0.15s var(--ease); }
+/* The classic blue tap-highlight, scoped to just these two cards — instant on
+   press or hold, on both touch and mouse. */
+.feature-banner::after {
+content: ''; position: absolute; inset: 0; border-radius: inherit;
+background: rgba(0, 122, 255, 0.22);
+opacity: 0; transition: opacity 0.1s ease;
+pointer-events: none;
+}
+.feature-banner:active::after { opacity: 1; }
 .feature-banner-img {
 width: 100%; height: auto; display: block;
 opacity: 0; transition: opacity 0.5s var(--ease);
@@ -525,7 +703,7 @@ color: var(--text-secondary); font-weight: 300; line-height: 1.7; font-size: 1re
 }
 
 /* ============================================
-   SB CONNECT — "Let's work together", Get in touch, email & kinG's telegram
+   SB CONNECT — "Let's work together", Get in touch, email + telegram
    ============================================ */
 .connect-section { padding: clamp(50px, 7vw, 90px) 6vw clamp(20px, 3vw, 30px); max-width: 900px; margin: 0 auto; }
 .connect-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: clamp(10px, 1.4vw, 16px); }
@@ -571,9 +749,10 @@ border-color: transparent; color: #fff; transform: scale(0.985);
 .footer-tagline-cap { font-size: 0.86rem; font-weight: 800; letter-spacing: 1.6px; color: var(--text-primary); }
 .footer-tagline-thin { font-size: 0.78rem; font-weight: 300; letter-spacing: 0.4px; color: var(--text-tertiary); text-transform: lowercase; }
 .footer-credit { margin-top: 18px; font-size: 0.78rem; font-weight: 400; color: var(--text-tertiary); letter-spacing: 0.3px; }
-.footer-legal-row { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+.footer-legal-row { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .footer-legal-row a { font-size: 0.76rem; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.3px; transition: color 0.25s var(--ease); }
 .footer-legal-row a:hover { color: var(--text-primary); }
+.footer-legal-sep { color: var(--text-dim); font-size: 0.76rem; }
 
 /* --- kinG's shared page bits (About / Contact / Track pages) --- */
 .page-hero { padding: 88px 20px 24px; max-width: 760px; margin: 0 auto; text-align: center; }
