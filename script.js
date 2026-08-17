@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- SB image protection: logo, main image, hero2 (not foolproof) ---
+  function debounce(fn, wait) {
+    let t = null;
+    return function (...args) {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait);
+    };
+  }
+
+  // --- SB image protection: logo, hero2 (not foolproof) ---
   (function initImageProtection() {
     const shields = document.querySelectorAll('.protected-shield');
     shields.forEach(shield => {
@@ -34,21 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateNavbar();
   }
 
-  // --- SB desktop nav: Process / About / Contact are always visible; on the
-  //     homepage "Home" alone fades in once the main hero image has scrolled
-  //     past. Pages with no hero image (Privacy, Terms, etc.) show it right away. ---
+  // --- SB desktop nav: Process / About / Contact are always visible; "Home"
+  //     alone fades in once the coded mockup has fully scrolled past. ---
   (function initHomeLinkReveal() {
-    const heroImageSection = document.querySelector('.hero-image-section');
+    const mockSection = document.querySelector('.hero-mock-section');
     const navHomeLink = document.getElementById('nav-home-link');
-    if (!navHomeLink) return;
-    if (!heroImageSection) { navHomeLink.classList.add('nav-home-visible'); return; }
+    if (!mockSection || !navHomeLink) return;
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const scrolledPast = entry.boundingClientRect.bottom < 0;
         navHomeLink.classList.toggle('nav-home-visible', scrolledPast);
       });
     }, { threshold: 0 });
-    io.observe(heroImageSection);
+    io.observe(mockSection);
   })();
 
   // --- SB mobile full-page menu ---
@@ -60,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   }
+  function isHomePage() {
+    const path = window.location.pathname;
+    return path === '/' || path === '' || path.endsWith('/index.html');
+  }
   if (menuToggle && menuOverlay) {
     menuToggle.addEventListener('click', () => toggleMenu(!menuOverlay.classList.contains('active')));
     menuOverlay.querySelectorAll('.menu-links-full > li > a').forEach(link => {
@@ -67,6 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   window.addEventListener('pageshow', () => toggleMenu(false));
+
+  // --- SB mobile menu "Home" stays highlighted only while we're at the very
+  //     top of the home page; scrolling away reverts it automatically,
+  //     whether the menu happens to be open or closed. ---
+  (function initMenuHomeHighlight() {
+    const homeLink = document.getElementById('menu-home-link');
+    if (!homeLink) return;
+    function update() {
+      const atTop = window.scrollY < 10;
+      homeLink.classList.toggle('nav-link-active', isHomePage() && atTop);
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
 
   // --- SB nav "clicked" highlight — the tapped/clicked link stays visibly
   //     brighter than its siblings within the same nav group. Holding shows
@@ -89,9 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('click', (e) => {
-      const path = window.location.pathname;
-      const isHome = path === '/' || path === '' || path.endsWith('/index.html');
-      if (isHome) {
+      if (isHomePage()) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -104,12 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
     word.addEventListener('click', () => word.classList.toggle('is-active'));
   });
 
-  // --- SB's "about us" link: click toggles a lasting highlight; holding
-  //     highlights it too, via the :active rule in CSS. ---
-  const aboutLink = document.getElementById('hero-about-link');
-  if (aboutLink) {
-    aboutLink.addEventListener('click', () => aboutLink.classList.add('is-active'));
-  }
+  // --- SB's "View ___" links (about us, process): click toggles a lasting
+  //     highlight; holding highlights it too, via the :active rule in CSS. ---
+  document.querySelectorAll('.hero-view-link').forEach(link => {
+    link.addEventListener('click', () => link.classList.add('is-active'));
+  });
 
   // --- SB's round CTA + email/telegram pills: press-and-hold gets the same
   //     colour shift as a click, on both mouse and touch. A quick tap still
@@ -135,8 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   // --- SB capability cards: tapping a card briefly intensifies its dynamic
-  //     visual (no light/press feedback on the card itself). Card 04's bars
-  //     also each rise individually when clicked directly. ---
+  //     visual only — no light/press feedback on the card shell itself. ---
   (function initCapabilityCards() {
     document.querySelectorAll('.capability-card').forEach(card => {
       const visual = card.querySelector('.capability-visual');
@@ -146,12 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => visual.classList.remove('cv-boost'), 900);
       });
     });
-    document.querySelectorAll('.cv-stack-bar').forEach(bar => {
+    // Visual Systems: click a bar and it rises while the rest settle down.
+    document.querySelectorAll('.cv-eq-bar').forEach(bar => {
       bar.addEventListener('click', (e) => {
         e.stopPropagation();
-        const siblings = bar.parentElement.querySelectorAll('.cv-stack-bar');
-        siblings.forEach(b => b.classList.remove('cv-stack-active'));
-        bar.classList.add('cv-stack-active');
+        const group = bar.parentElement;
+        if (!group) return;
+        group.querySelectorAll('.cv-eq-bar').forEach(b => b.classList.remove('cv-eq-active'));
+        bar.classList.add('cv-eq-active');
       });
     });
   })();
@@ -165,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  fadeInMediaOnReady('.feature-banner-img, .hero-main-img');
+  fadeInMediaOnReady('.feature-banner-img');
 
   // --- SB's reveal-on-scroll (buffered a little early so content never feels late) ---
   const revealObserver = new IntersectionObserver((entries) => {
@@ -174,5 +196,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1, rootMargin: '120px 0px' });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ============================================
+     SB's coded UI mockup — sizing is handled entirely by CSS container
+     queries now (see .mock-window's --mu in style.css), so it always fills
+     its container exactly with no JS measuring involved. This just runs the
+     staged reveal once the mockup first scrolls into view. Every stage below
+     only ever touches opacity/transform (plus a couple of text swaps), so it
+     stays smooth at 120fps.
+     ============================================ */
+  (function initMockWindow() {
+    const win = document.getElementById('mock-window');
+    if (!win) return;
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    function runSequence() {
+      win.classList.add('mock-in');
+
+      (async () => {
+        await sleep(150);
+        win.querySelectorAll('.mock-fade-block').forEach((el) => el.classList.add('mock-fade-in'));
+      })();
+
+      (async () => {
+        const loading = win.querySelector('#mock-files-loading');
+        const list = win.querySelector('#mock-files');
+        if (!loading || !list) return;
+        await sleep(1900);
+        loading.classList.add('mock-visible');
+        await sleep(2300);
+        loading.classList.remove('mock-visible');
+        list.classList.add('mock-visible');
+      })();
+
+      (async () => {
+        const msgs = win.querySelectorAll('.mock-chat-msg');
+        await sleep(1700);
+        for (const msg of msgs) {
+          msg.classList.add('mock-visible');
+          await sleep(1500);
+        }
+      })();
+
+      (async () => {
+        const status = win.querySelector('#mock-code-status');
+        const lines = win.querySelectorAll('.mock-line');
+        if (!status) return;
+        await sleep(300);
+        status.textContent = 'Loading...';
+        status.classList.add('mock-visible');
+        await sleep(2400);
+        status.textContent = 'Waiting...';
+        await sleep(2800);
+        status.textContent = 'Appearing...';
+        await sleep(2800);
+        status.classList.remove('mock-visible');
+        for (const line of lines) {
+          line.classList.add('mock-visible');
+          await sleep(65);
+        }
+      })();
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runSequence();
+          io.unobserve(win);
+        }
+      });
+    }, { threshold: 0.15 });
+    io.observe(win);
+  })();
 
 });
