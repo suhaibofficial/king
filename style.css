@@ -164,7 +164,7 @@ background: var(--text-primary);
 transition: top 0.4s var(--ease), transform 0.46s var(--spring);
 }
 .menu-bar-1 { top: 0; }
-.menu-bar-2 { top: 7.8px; }
+.menu-bar-2 { top: 6.8px; }
 body.menu-open .menu-bar-1 { top: 4.9px; transform: rotate(45deg); }
 body.menu-open .menu-bar-2 { top: 4.9px; transform: rotate(-45deg); }
 
@@ -492,7 +492,7 @@ will-change: opacity, transform;
 .mock-activity-icon-c { background: rgba(250,204,21,0.15); color: #ca8a04; }
 .mock-activity-icon-d { background: rgba(134,239,172,0.15); color: var(--mock-green); }
 
-.mock-chat { display: flex; flex-direction: column; gap: calc(var(--mu) * 7); margin-top: calc(var(--mu) * 2); }
+.mock-chat { display: flex; flex-direction: column; gap: calc(var(--mu) * 12); margin-top: calc(var(--mu) * 4); }
 .mock-chat-msg { display: flex; gap: calc(var(--mu) * 7); align-items: flex-start; opacity: 0; transform: translateY(8px); transition: opacity 0.6s var(--ease-soft), transform 0.6s var(--ease-soft); will-change: opacity, transform; }
 .mock-chat-msg.mock-visible { opacity: 1; transform: translateY(0); }
 .mock-avatar { width: calc(var(--mu) * 18); height: calc(var(--mu) * 18); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: calc(var(--mu) * 7.4); font-weight: 800; flex-shrink: 0; }
@@ -500,7 +500,7 @@ will-change: opacity, transform;
 .mock-avatar-us { background: var(--mock-text); color: var(--mock-bg); }
 .mock-chat-bubble { display: block; background: var(--mock-bg-3); border: 1px solid var(--mock-border); border-radius: calc(var(--mu) * 10); padding: calc(var(--mu) * 6) calc(var(--mu) * 9); font-size: calc(var(--mu) * 9.6); line-height: 1.35; color: var(--mock-text-dim); }
 .mock-chat-bubble b { display: block; font-size: calc(var(--mu) * 9); color: var(--mock-text); margin-bottom: calc(var(--mu) * 1); }
-.mock-chat-input { margin-top: calc(var(--mu) * 10); display: flex; align-items: center; justify-content: space-between; padding: calc(var(--mu) * 7) calc(var(--mu) * 10); border-radius: calc(var(--mu) * 10); border: 1px solid var(--mock-border); background: var(--mock-bg-3); font-size: calc(var(--mu) * 9.6); color: var(--mock-text-dimmer); }
+.mock-chat-input { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding: calc(var(--mu) * 7) calc(var(--mu) * 10); border-radius: calc(var(--mu) * 10); border: 1px solid var(--mock-border); background: var(--mock-bg-3); font-size: calc(var(--mu) * 9.6); color: var(--mock-text-dimmer); }
 .mock-send { color: var(--mock-text-dimmer); }
 
 /* --- right pane: code editor --- */
@@ -510,7 +510,7 @@ will-change: opacity, transform;
 .mock-code-body { padding: calc(var(--mu) * 9) calc(var(--mu) * 13); overflow: hidden; }
 .mock-code-status { font-size: calc(var(--mu) * 9.9); color: var(--mock-text-dimmer); font-family: 'Courier New', monospace; opacity: 0; height: 0; transition: opacity 0.35s ease; }
 .mock-code-status.mock-visible { opacity: 1; height: auto; margin-bottom: calc(var(--mu) * 4); }
-.mock-code-lines { font-family: 'Courier New', monospace; font-size: calc(var(--mu) * 9.9); line-height: 1.75; white-space: pre; }
+.mock-code-lines { font-family: 'Courier New', monospace; font-size: calc(var(--mu) * 9.9); line-height: 1.45; white-space: pre; }
 .mock-line { display: block; opacity: 0; transform: translateX(-5px); transition: opacity 0.35s var(--ease-soft), transform 0.35s var(--ease-soft); color: var(--mock-text-dim); will-change: opacity, transform; }
 .mock-line.mock-visible { opacity: 1; transform: translateX(0); }
 .mock-ln { display: inline-block; width: calc(var(--mu) * 17); color: var(--mock-text-dimmer); user-select: none; }
@@ -523,7 +523,7 @@ will-change: opacity, transform;
 /* ============================================
    SB IMPACT STATEMENT — full width, edge to edge
    ============================================ */
-.impact-section { padding: 0.5mm 6vw clamp(24px, 4vw, 44px); width: 100%; }
+.impact-section { padding: clamp(28px, 4vw, 44px) 6vw clamp(24px, 4vw, 44px); width: 100%; }
 /* The divider that used to sit right after the coded mockup is hidden (not
    removed) so index.html stays untouched — only this specific instance,
    right after .hero-mock-section, disappears; every other divider on the
@@ -553,14 +553,14 @@ display: flex; gap: clamp(16px, 2vw, 22px);
 overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
 -webkit-overflow-scrolling: touch;
 padding: 6px 6vw 14px 0;
+scroll-padding-left: 6vw;
 scrollbar-width: none; -ms-overflow-style: none;
 }
 .capabilities-scroll::-webkit-scrollbar { display: none; }
-/* Leading (start-edge) padding on a horizontally-scrolling flex container is
-   unreliable at the initial scroll position in several browsers — it can get
-   ignored entirely, which is why the left gap kept vanishing no matter the
-   padding value. margin-left on the first card sidesteps that bug outright. */
-.capability-card:first-child { margin-left: 6vw; }
+/* A real spacer flex-item (not padding or margin) reserves the leading gap —
+   an actual box in the flex flow can't be silently ignored the way leading
+   padding/margin sometimes is on a scroll-snap container. */
+.capabilities-scroll::before { content: ''; flex: 0 0 6vw; }
 
 .capability-card {
 scroll-snap-align: start; flex: 0 0 auto;
@@ -575,8 +575,8 @@ display: flex; flex-direction: column; gap: clamp(20px, 3vw, 30px);
 .capability-card { width: 52vw; min-height: 420px; }
 }
 @media (min-width: 960px) {
-.capabilities-scroll { padding: 6px 5vw 16px 0; }
-.capability-card:first-child { margin-left: 5vw; }
+.capabilities-scroll { padding: 6px 5vw 16px 0; scroll-padding-left: 5vw; }
+.capabilities-scroll::before { flex-basis: 5vw; }
 .capability-card { width: clamp(280px, 33vw, 380px); min-height: clamp(420px, 34vw, 500px); }
 }
 
@@ -625,20 +625,22 @@ animation: cvShimmer 2.8s linear infinite;
    Click one and it rises while the rest settle down. */
 .capability-visual-systems { align-items: flex-end; gap: 10px; padding: 0 0 22px; }
 .cv-eq-bar {
-width: 22px; border-radius: 6px 6px 0 0; cursor: pointer;
+width: 22px; height: 100%; border-radius: 6px 6px 0 0; cursor: pointer;
 background: linear-gradient(180deg, #22c55e, #ef4444, #3b82f6, #22c55e);
 background-size: 100% 300%;
 animation: cvEqColor 3.6s linear infinite;
-transition: height 0.5s var(--spring), opacity 0.4s var(--ease);
+transform-origin: bottom;
+transition: transform 0.5s var(--spring), opacity 0.4s var(--ease);
 opacity: 0.78;
+will-change: transform;
 }
-.cv-eq-bar:nth-child(1) { height: 32%; animation-delay: 0s; }
-.cv-eq-bar:nth-child(2) { height: 50%; animation-delay: 0.3s; }
-.cv-eq-bar:nth-child(3) { height: 68%; animation-delay: 0.6s; }
-.cv-eq-bar:nth-child(4) { height: 42%; animation-delay: 0.9s; }
-.cv-eq-bar:nth-child(5) { height: 58%; animation-delay: 1.2s; }
-.cv-eq-bar:nth-child(6) { height: 36%; animation-delay: 1.5s; }
-.cv-eq-bar.cv-eq-active { height: 86% !important; opacity: 1; animation-duration: 1.6s; }
+.cv-eq-bar:nth-child(1) { transform: scaleY(0.32); animation-delay: 0s; }
+.cv-eq-bar:nth-child(2) { transform: scaleY(0.5); animation-delay: 0.3s; }
+.cv-eq-bar:nth-child(3) { transform: scaleY(0.68); animation-delay: 0.6s; }
+.cv-eq-bar:nth-child(4) { transform: scaleY(0.42); animation-delay: 0.9s; }
+.cv-eq-bar:nth-child(5) { transform: scaleY(0.58); animation-delay: 1.2s; }
+.cv-eq-bar:nth-child(6) { transform: scaleY(0.36); animation-delay: 1.5s; }
+.cv-eq-bar.cv-eq-active { transform: scaleY(0.86) !important; opacity: 1; animation-duration: 1.6s; }
 @keyframes cvEqColor { 0% { background-position: 0 0; } 100% { background-position: 0 300%; } }
 .capability-visual-systems.cv-boost .cv-eq-bar { animation-duration: 1.4s; }
 
@@ -770,3 +772,4 @@ border-color: transparent; color: #fff; transform: scale(0.985);
 .platform-btn:hover { background: var(--bg-subtle-hover); transform: translateY(-3px); }
 .glass-btn { color: var(--text-primary); }
 .section-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 500; margin-bottom: 6px; }
+
